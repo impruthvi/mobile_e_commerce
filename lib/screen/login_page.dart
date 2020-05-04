@@ -9,6 +9,7 @@ class LogInpage extends StatefulWidget {
 
 class LogInpageState extends State<LogInpage> {
   final _formkey = GlobalKey<FormState>();
+  bool _obscureText = true;
   String _password,_email;
 
   Widget _showTitle(){
@@ -38,9 +39,21 @@ class LogInpageState extends State<LogInpage> {
       child:TextFormField(
         onSaved: (val) => _password = val,
         validator: (val) => val.length < 6 ? "username too short" : null,
-        obscureText: true,
+        obscureText: _obscureText,
 
         decoration: InputDecoration(
+          suffixIcon: GestureDetector(
+            onTap: (){
+              setState(() {
+                _obscureText = !_obscureText;
+              });
+            },
+
+            child: Icon(
+              _obscureText ? Icons.visibility : Icons.visibility_off
+
+            ),
+          ),
 
             border: OutlineInputBorder(),
             labelText: "Password",

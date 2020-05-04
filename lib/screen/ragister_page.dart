@@ -7,6 +7,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final _formkey = GlobalKey<FormState>();
+  bool _obscureText = true;
   String _username,_password,_email;
 
   Widget _showTitle(){
@@ -54,6 +55,19 @@ class _RegisterPageState extends State<RegisterPage> {
           obscureText: true,
 
           decoration: InputDecoration(
+              suffixIcon: GestureDetector(
+                onTap: (){
+                  setState(() {
+                    _obscureText = !_obscureText;
+                  });
+                },
+
+                child: Icon(
+                    _obscureText ? Icons.visibility : Icons.visibility_off
+
+                ),
+              ),
+
 
               border: OutlineInputBorder(),
               labelText: "Password",
