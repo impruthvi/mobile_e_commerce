@@ -1,35 +1,22 @@
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatefulWidget {
+class LogInpage extends StatefulWidget {
+
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  LogInpageState  createState() => LogInpageState();
+
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class LogInpageState extends State<LogInpage> {
   final _formkey = GlobalKey<FormState>();
-  String _username,_password,_email;
+  String _password,_email;
 
   Widget _showTitle(){
-    return   Text('Register',style: Theme.of(context).textTheme.headline,);
+    return   Center(child: Text('Login',style: Theme.of(context).textTheme.headline,));
 
   }
 
-  Widget _showUsername(){
-    return   Padding(padding:EdgeInsets.only(top:20.0),
 
-      child:TextFormField(
-        onSaved: (val) => _username = val,
-        validator: (val) => val.length < 6 ? "username too short ": null,
-
-        decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: "Username",
-            hintText: "Enter username,min length 6",
-            icon: Icon(Icons.face,color: Colors.grey,)
-        ),
-      ),
-    );
-  }
 
   Widget _showEmail(){
     return   Padding(padding:EdgeInsets.only(top:20.0),
@@ -48,20 +35,20 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _showPassword(){
     return Padding(padding:EdgeInsets.only(top:20.0),
-        child:TextFormField(
-          onSaved: (val) => _password = val,
-          validator: (val) => val.length < 6 ? "username too short" : null,
-          obscureText: true,
+      child:TextFormField(
+        onSaved: (val) => _password = val,
+        validator: (val) => val.length < 6 ? "username too short" : null,
+        obscureText: true,
 
-          decoration: InputDecoration(
+        decoration: InputDecoration(
 
-              border: OutlineInputBorder(),
-              labelText: "Password",
-              hintText: "Enter username,min length 6",
-              icon: Icon(Icons.lock_outline,color: Colors.grey,)
-          ),
+            border: OutlineInputBorder(),
+            labelText: "Password",
+            hintText: "Enter username,min length 6",
+            icon: Icon(Icons.lock_outline,color: Colors.grey,)
         ),
-      );
+      ),
+    );
 
   }
 
@@ -75,18 +62,18 @@ class _RegisterPageState extends State<RegisterPage> {
               onPressed: _submit,
               child: Text("Submit",style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black)),
               elevation: 8.0,
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).accentColor,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0))
               ),
             ),
             FlatButton(
                 onPressed: (){
-                  Navigator.pushReplacementNamed(context, '/login');
+                  Navigator.pushReplacementNamed(context,'/register');
 
-                      },
+                },
 
-                child:Text("Existing user? login")
+                child:Text("New user? Register")
             )
           ],
         ),
@@ -94,12 +81,12 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _submit(){
-  final form = _formkey.currentState;
+    final form = _formkey.currentState;
 
-  if(form.validate()){
-    form.save();
-    print("username $_username,Email $_email,Password $_password");
-  }
+    if(form.validate()){
+      form.save();
+      print("Email $_email,Password $_password");
+    }
 
   }
   @override
@@ -107,7 +94,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text("Register"),
+          child: Text("Login"),
         ),
 
       ),
@@ -116,11 +103,11 @@ class _RegisterPageState extends State<RegisterPage> {
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: SingleChildScrollView(
           child: Form(
-            key: _formkey,
+              key: _formkey,
               child:Column(
                 children: <Widget>[
                   _showTitle(),
-                  _showUsername(),
+
                   _showEmail(),
                   _showPassword(),
                   _showButton()
